@@ -1,0 +1,152 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Matrimonio Giovanna & Pietro{% endblock %}</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+          theme: {
+            fontFamily: {
+              'body': ['"Amatic SC"'],
+          }
+        }
+     }
+      </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        .slideshow {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            animation: slideshow 15s infinite;
+        }
+
+        /* Keyframes for slideshow effect */
+        @keyframes slideshow {
+            0%, 25% {
+                background-image: url('/static/wedding/images/gallery1.jpeg');
+            }
+            26%, 50% {
+                background-image: url('/static/wedding/images/gallery2.jpeg');
+            }
+            51%, 75% {
+                background-image: url('/static/wedding/images/gallery3.jpeg');
+            }
+            76%, 100% {
+                background-image: url('/static/wedding/images/slide1.jpeg');
+            }
+        }
+
+        /* Text styling to make content readable over the background */
+        #countdown {
+            text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.8);
+        }
+
+        section {
+            height: 100vh; /* Full screen height */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .slideshow-container {
+            position: relative;
+        }
+
+        .slides {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .slide {
+            flex: 0 0 100%;
+        }
+
+    </style>  
+</head>
+<body class="bg-gray-50 text-gray-800 font-body">
+    <header id="header" class="fixed top-0 left-0 w-full z-50 bg-transparent transition-all duration-300">
+        <div class="flex justify-between items-center px-4 py-4">
+            <!-- Menu Icon Aligned Right -->
+            <button id="menu-toggle" class="ml-auto text-white hover:text-gray-300 focus:outline-none text-3xl">
+                ☰
+            </button>
+            <!-- Dropdown Menu -->
+            <nav id="dropdown-menu" class="hidden absolute top-full left-0 w-full bg-white shadow-md rounded-b-md transition-all duration-300">
+                <ul class="flex flex-col items-center py-4 space-y-4 text-lg font-medium text-gray-800">
+                    <li><a href="#section1" class="hover:text-gray-500">Il nostro matrimonio</a></li>
+                    <li><a href="#section2" class="hover:text-gray-500">Galleria</a></li>
+                    <li><a href="#section3" class="hover:text-gray-500">RSVP</a></li>
+                    <li><a href="#section4" class="hover:text-gray-500">Lista nozze</a></li>
+                </ul>
+            </nav>
+            
+        </div>
+    </header>
+    
+    
+    <main class="container mx-auto">
+        {% block content %}
+        {% endblock %}
+    </main>
+    <footer class="bg-gray-800 text-white text-center py-4">
+        <p>&copy; 2024 Giovanna & Pietro</p>
+    </footer>
+
+    <script>
+        const header = document.getElementById("header");
+        const headerDiv = document.querySelector("header div");
+        const menuToggle = document.getElementById("menu-toggle");
+        const dropdownMenu = document.getElementById("dropdown-menu");
+
+        let menuOpen = false;
+    
+        // Scroll and menu toggle logic
+        window.addEventListener("scroll", () => {
+            if (window.scrollY > 50 || menuOpen) {
+                header.classList.add("bg-white", "shadow");
+                header.classList.remove("bg-transparent");
+                menuToggle.classList.add("text-black");
+                menuToggle.classList.remove("text-white");
+            } else {
+                header.classList.add("bg-transparent");
+                header.classList.remove("bg-white", "shadow");
+                menuToggle.classList.add("text-white");
+                menuToggle.classList.remove("text-black");
+            }
+        });
+    
+        menuToggle.addEventListener("click", () => {
+            menuOpen = !menuOpen;
+            dropdownMenu.classList.toggle("hidden");
+    
+            if (menuOpen) {
+                console.log(header)
+                header.classList.add("bg-white", "shadow");
+                headerDiv.classList.add("border-b", "border-gray-300");
+                header.classList.remove("bg-transparent");
+                menuToggle.classList.add("text-black");
+                menuToggle.classList.remove("text-white");
+            } else if (window.scrollY <= 50) {
+                header.classList.add("bg-transparent");
+                header.classList.remove("bg-white", "shadow");
+                headerDiv.classList.remove("border-b", "border-gray-300");
+                menuToggle.classList.add("text-white");
+                menuToggle.classList.remove("text-black");
+            }
+        });
+    </script>
+    
+    
+    
+</body>
+</html>
+

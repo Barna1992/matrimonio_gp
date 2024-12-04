@@ -1,0 +1,210 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Matrimonio Giovanna & Pietro</title>
+<link href='https://fonts.googleapis.com/css?family=Caveat' rel='stylesheet'>
+<link href='https://fonts.googleapis.com/css?family=Amatic+SC' rel='stylesheet'>
+<link rel="stylesheet" href="/static/wedding/css/wholeStyle.css">
+<script src="https://cdn.tailwindcss.com"></script>
+
+</head>
+<body>
+  <div class="min-h-screen bg-gray-100">
+    <!-- Navbar -->
+    <div class="navbar-menu" style="display: flex; justify-content: space-between;flex-direction: row-reverse;">
+      <div>
+      <a href="cart"><img src="{% static 'wedding/images/cart_black.svg' %}"></a></div>
+      <div class="badge" id="cartBadge">0</div>
+    </div>
+  
+    <!-- Hero Section -->
+    <div class="hero-section-bg-lista bg-cover bg-center py-12">
+      <div class="text-center text-white">
+        <h1 class="text-3xl font-bold">Lista Nozze</h1>
+      </div>
+    </div>
+  
+    <!-- Gift Sections -->
+    <div class="container mx-auto px-4 py-8 space-y-12">
+      <!-- Travel Gift Section -->
+      <div id="travel-gift" class="bg-white shadow rounded-lg p-6">
+        <h2 class="text-2xl font-bold text-gray-800 mb-4">
+          Vuoi contribuire con il tuo regalo al nostro viaggio di nozze?
+        </h2>
+        <div id="items-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <!-- Dynamically populated items will appear here -->
+        </div>
+      </div>
+  
+    </div>
+  </div>
+  
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    function getCart() {
+      let cart = JSON.parse(localStorage.getItem('cart')) || [];
+      const value = cart.map(e => e.quantity).reduce((partialSum, a) => partialSum + a, 0)
+      document.getElementById('cartBadge').innerText = value;
+
+      // Show the badge if the number is greater than 0
+      if (value > 0) {
+          document.getElementById('cartBadge').style.display = 'block';
+      }
+      else {
+          document.getElementById('cartBadge').style.display = 'none';
+      }
+    }
+
+
+
+
+    fetch('https://matrimonioam.pythonanywhere.com/api/items/')
+        .then(response => response.json())
+        .then(items => {
+            const container = document.getElementById('items-container');
+            items.filter(i => i.category === "travel").sort((a,b) => a.ordering - b.ordering).forEach(item => {
+              const itemHtml = `
+              <div class="object-card">
+                  <div class="object-img"><img src="${item.picture}"></div>
+                  <div class="object-buy bg-gray-100"><div class="price">${item.price}€</div></div>
+                  <div class="object-title bg-gray-100">${item.title}</div>
+                  ${item.quantity > 0 ?
+                      `<div class="object-cart">
+                          <div class="cart-icon"><img src="{% static 'wedding/images/cart_black.svg' %}"></div>
+                          <div class="cart-text" title="${item.title}" price="${item.price}" itemid="${item.id}" imgurl="${item.picture}" quantity="${item.quantity}">Aggiungi al carrello</div>
+                      </div>` :
+                      `<div class="object-cart-expired"><p>Esaurito</p></div>`
+                  }
+              </div>`;
+              container.innerHTML += itemHtml;
+            });
+
+            const cartTextElements = document.querySelectorAll('.object-cart');
+            function updateCart(item) {
+              let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+              // Check if the item is already in the cart
+              const existingItem = cart.find(cartItem => cartItem.id === item.id);
+
+              if (existingItem) {
+                  // If the item exists, increase its quantity
+                  existingItem.quantity++;
+              } else {
+                  // If the item is not in the cart, add it
+                  cart.push({
+                      id: item.id,
+                      title: item.title,
+                      price: item.price,
+                      quantity: 1,
+                      img: item.img,
+                      quantityAvailable: parseInt(item.quantityAvailable) + 1,
+                  });
+              }
+
+              localStorage.setItem('cart', JSON.stringify(cart));
+            }   
+            cartTextElements.forEach(element => {
+                element.addEventListener('click', function () {
+                    // Get the corresponding item data
+                    const itemIndex = Array.from(cartTextElements).indexOf(element);
+                    const selectedItem = items[itemIndex];
+
+                    let cartText = element.children[1]
+                    let quantity = cartText.getAttribute('quantity')
+                    if ( parseInt(quantity) > 0 ) {
+                      cartText.setAttribute('quantity', parseInt(quantity) - 1)
+                    }
+                    if ( parseInt(quantity) === 1 ) {
+                      let parent = element.parentElement
+                      element.style.display = 'none'
+                      let divChild = document.createElement('div')
+                      divChild.className = 'object-cart-expired'
+                      divChild.innerHTML = '<p>Esaurito</p>'
+                      parent.appendChild(divChild)
+                    }
+                    // Call the addToCart function with the selected item
+                    updateCart({
+                      id: cartText.getAttribute('itemid'),
+                      title: cartText.title,
+                      price: cartText.getAttribute('price'),
+                      img: cartText.getAttribute('imgurl'),
+                      quantityAvailable: cartText.getAttribute('quantity'),
+                    })
+                    getCart()
+                    const badgeIcon = document.querySelector('.navbar-menu .badge');
+//                    badgeIcon.classList.add('animate-cart');
+
+                    // Remove the class after the animation duration
+                    badgeIcon.classList.add('animate-cart');
+                    setTimeout(() => {
+                        badgeIcon.classList.remove('animate-cart');
+                    }, 1000);
+
+                    const cartIcon = document.querySelector('.navbar-menu img');
+                    cartIcon.classList.add('shake-effect');
+                    setTimeout(() => {
+                        cartIcon.classList.remove('shake-effect');
+                    }, 1000);
+
+                });
+            });
+        })
+        .catch(error => console.error('Error:', error));
+});
+
+</script>
+<footer class="bg-gray-800 text-white text-center py-4">
+    <p>&copy; 2024 Giovanna & Pietro</p>
+</footer>
+<script>
+  // Function to initialize the cart object
+  document.addEventListener('DOMContentLoaded', function () {
+
+  function initializeCart() {
+      // Check if cart already exists in localStorage
+      let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+      // If not, create an empty cart
+      if (!cart || !Array.isArray(cart)) {
+          cart = [];
+      }
+
+      return cart;
+  }
+
+
+  // Function to update and save the cart in localStorage
+
+  // Example usage:
+  // Initialize the cart
+  let cart = initializeCart();
+
+  // Add an item to the cart
+
+  // Update and save the cart
+
+  // Retrieve the cart anytime during the session
+  let retrievedCart = initializeCart();
+
+
+  // Sample JavaScript to update the badge number
+  let badgeNumber = cart.map(e => e.quantity).reduce((partialSum, a) => partialSum + a, 0); // Replace this with your dynamic value
+  document.getElementById('cartBadge').innerText = badgeNumber;
+
+  // Show the badge if the number is greater than 0
+  if (badgeNumber > 0) {
+      document.getElementById('cartBadge').style.display = 'block';
+  }
+  else {
+      document.getElementById('cartBadge').style.display = 'none';
+  }
+  })
+
+</script>
+</body>
+</html>

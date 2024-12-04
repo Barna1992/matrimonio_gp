@@ -1,0 +1,90 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ringraziamento</title>
+    <!-- Add any additional styles or scripts as needed -->
+    <style>
+        /* Add your styling here */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #abd0f0;
+        }
+
+        h1 {
+            text-align: center;
+            padding: 1rem;
+        }
+        p {
+            text-align: center;
+        }
+        .container {
+            padding: 4rem;
+        }
+        .iban {
+            font-size: 2rem
+        }
+        @media screen and (max-width: 500px) {
+            .iban {
+                font-size: 20px;
+            }
+            .container {
+                padding: 20px;
+            }
+        }
+
+    </style>
+    <link rel="stylesheet" href="/static/css/cart-style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+
+</head>
+<body class="bg-gray-100 min-h-screen flex flex-col justify-center items-center">
+    <!-- Thank You Container -->
+    <div class="bg-white shadow-md rounded-lg p-6 max-w-md w-full mx-auto text-center">
+      <h1 class="text-3xl font-bold mb-4 text-gray-800">Grazie mille!</h1>
+  
+      <!-- Personalized Message -->
+      <script>
+        localStorage.clear();
+        // Function to get URL parameters by name
+        function getUrlParameter(name) {
+          const urlParams = new URLSearchParams(window.location.search);
+          return urlParams.get(name);
+        }
+  
+        // Retrieve the "giftGiver" and "price" parameters from the URL
+        const giftGiver = getUrlParameter('giftGiver');
+        const price = getUrlParameter('price');
+  
+        // Display a personalized thank you message
+        document.write(`
+          <p class="text-lg text-gray-700 mb-4">Grazie <strong class="text-blue-600">${giftGiver}</strong> per il tuo contributo!</p>
+          <p class="text-lg text-gray-700 mb-4">
+            Puoi completare l'ordine effettuando il pagamento di 
+            <strong class="text-blue-600">${price} €</strong> tramite un bonifico bancario al seguente IBAN:
+          </p>
+        `);
+      </script>
+  
+      <!-- IBAN Details -->
+      <div class="bg-gray-50 border border-gray-200 rounded-lg p-4 mb-6">
+        <p class="text-lg font-bold text-blue-600 iban">IT00 0001 0000 0000 0000 0000 0000</p>
+        <p class="text-sm text-gray-500">Intestato a:</p>
+        <p class="text-lg font-medium text-gray-800">Giovanna & Pietro</p>  
+    </div>
+  
+      <!-- Logo -->
+      <div class="flex justify-center">
+        <img 
+          src="{% static 'images/logo.png' %}" 
+          alt="Logo" 
+          class="w-32 h-32 object-contain">
+      </div>
+    </div>
+  </body>
+  
+</html>

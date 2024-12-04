@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" type="image/x-icon" href="assets/wedding.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finalizza</title>
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Add any additional styles or scripts as needed -->
+    <style>
+        /* Add your styling here */
+
+
+        form {
+            max-width: 600px;
+            margin: 0 auto;
+            width: 80%;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        input,
+        textarea {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 16px;
+            box-sizing: border-box;
+        }
+
+        textarea {
+            resize: vertical; /* Allow vertical resizing of the textarea */
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+        h1 {
+            text-align: center;
+            padding-top: 1rem;
+            margin: 15px;
+        }
+        img {
+           max-width: 100%!important;     
+        }
+        .item-title {
+            text-align: center;
+            padding: 1rem;
+        }
+    </style>
+        <link rel="stylesheet" href="/static/css/cart-style.css">
+
+</head>
+<body class="cart-page">
+
+    <div class="min-h-screen flex flex-col bg-gray-100">
+        <!-- Header -->
+        <header class="bg-gray-800 text-white py-4 text-center shadow-md">
+          <h1 class="text-3xl font-bold">Riepilogo del tuo regalo</h1>
+        </header>
+      
+        <!-- Main Content -->
+        <main class="flex-grow container mx-auto px-4 py-8 space-y-8">
+          <!-- Cart Section -->
+          <section>
+            <div id="cart-items-container" class="space-y-4">
+              <!-- Cart items will be dynamically added here -->
+            </div>
+            <div id="cart-total" class="mt-6 text-right">
+              <strong class="text-xl">Totale: <span id="total-price" class="text-blue-600">0.00</span>€</strong>
+            </div>
+          </section>
+      
+          <!-- Form Section -->
+          <section>
+            <h1 class="text-2xl font-bold mb-6 text-center">Lasciaci alcune informazioni</h1>
+            <form class="bg-white shadow-md rounded-lg p-6 space-y-6">
+              <!-- Gift Giver -->
+              <div>
+                <label for="giftGiver" class="block text-gray-700 font-medium mb-2">Chi ci sta facendo il regalo</label>
+                <input 
+                  type="text" 
+                  id="giftGiver" 
+                  name="giftGiver" 
+                  required 
+                  class="w-full border border-gray-300 rounded-lg py-2 px-4 focus:ring-blue-400 focus:border-blue-400 focus:outline-none"
+                  placeholder="Il tuo nome o il nome del gruppo">
+              </div>
+      
+              <!-- Email -->
+              <div>
+                <label for="yourEmail" class="block text-gray-700 font-medium mb-2">La tua email</label>
+                <input 
+                  type="email" 
+                  id="yourEmail" 
+                  name="yourEmail" 
+                  required 
+                  class="w-full border border-gray-300 rounded-lg py-2 px-4 focus:ring-blue-400 focus:border-blue-400 focus:outline-none"
+                  placeholder="nome@email.com">
+              </div>
+      
+              <!-- Comment -->
+              <div>
+                <label for="comment" class="block text-gray-700 font-medium mb-2">Lascia un commento agli sposi</label>
+                <textarea 
+                  id="comment" 
+                  name="comment" 
+                  rows="4" 
+                  required 
+                  class="w-full border border-gray-300 rounded-lg py-2 px-4 focus:ring-blue-400 focus:border-blue-400 focus:outline-none"
+                  placeholder="Scrivi un messaggio agli sposi"></textarea>
+              </div>
+      
+              <!-- Submit Button -->
+              <div class="text-center">
+                <button 
+                  type="submit" 
+                  onclick="submitForm()" 
+                  class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-3 px-6 rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2">
+                  Invia Regalo
+                </button>
+              </div>
+            </form>
+          </section>
+        </main>
+      
+        <!-- Footer -->
+        <footer class="bg-gray-800 text-white text-center py-4 mt-auto shadow-inner">
+          <p class="text-sm">&copy; 2024 Giovanna & Pietro</p>
+        </footer>
+      </div>
+      
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Retrieve the cart from localStorage
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+            // Get the container to display cart items
+            const cartItemsContainer = document.getElementById('cart-items-container');
+
+            // Loop through each item in the cart
+            cart.forEach(item => {
+                // Try casting item.price to float
+                try {
+                    item.price = parseFloat(item.price);
+                    if (isNaN(item.price)) {
+                        throw new Error('Invalid price');
+                    }
+                } catch (error) {
+                    console.error('Invalid price for item:', item);
+                    return;
+                }
+
+                // Create a div for each item
+                const cartItemDiv = document.createElement('div');
+                cartItemDiv.className = 'cart-item';
+
+                const cartItemSpan = document.createElement('span');
+                cartItemSpan.style = 'display:none';
+                cartItemSpan.setAttribute("id", `${item.id}-${item.quantity}`)
+                cartItemSpan.className = 'items-info'
+
+                // Display image
+                const imageItem = document.createElement('img');
+                imageItem.src = item.img;
+
+                const imageContainer = document.createElement('div');
+                imageContainer.className = 'image-container'
+
+                imageContainer.appendChild(imageItem)
+
+                // Display item details
+                const itemDetails = document.createElement('div');
+                itemDetails.className = 'item-title'
+                itemDetails.innerHTML = `${item.title}`;
+                itemDetails.appendChild(cartItemSpan);
+
+
+                // Append elements to the cart item div
+                cartItemDiv.appendChild(imageContainer);
+                cartItemDiv.appendChild(itemDetails);
+
+                // Append the cart item div to the container
+                cartItemsContainer.appendChild(cartItemDiv);
+
+                // Update the total for the initial cart
+                updateTotal(cart);
+            });
+        });
+
+        function updateTotal(cart) {
+            const totalPriceElement = document.getElementById('total-price');
+            const totalPrice = cart.reduce((acc, item) => {
+                // Ensure item.price is a valid number before adding to the total
+                if (!isNaN(item.price)) {
+                    acc += item.price * item.quantity;
+                }
+                return acc;
+            }, 0);
+            totalPriceElement.innerText = totalPrice.toFixed(2);
+        }
+
+        function submitForm() {
+            // Get form values
+            const giftGiverValue = document.getElementById('giftGiver').value;
+            const yourEmailValue = document.getElementById('yourEmail').value;
+            const commentValue = document.getElementById('comment').value;
+            event.preventDefault();
+            // Construct URL with form values
+
+            const itemTitleElements = document.querySelectorAll('.item-title');
+            const itemIdElements = document.querySelectorAll('.items-info');
+
+            // Initialize an empty string to store merged values
+            let mergedString = '';
+            let StringIds = [];
+
+            // Iterate over the selected elements
+            itemTitleElements.forEach(itemTitleElement => {
+                // Append the innerText of each element to the merged string
+                mergedString += itemTitleElement.innerText + ' , ';
+            });
+
+            itemIdElements.forEach(element => {
+                // Append the innerText of each element to the merged string
+                StringIds.push(element.id);
+            });
+
+            const itemTitles = mergedString;
+            const itemPrice = document.getElementById("total-price").innerText;
+
+            // Prepare data for POST request
+            const data = {
+                name: giftGiverValue,
+                email: yourEmailValue,
+                comment: commentValue,
+                string_ids: StringIds,
+                item_titles: itemTitles,  // Match the field name in your model
+                item_price: parseFloat(itemPrice),  // Convert to float
+            };
+
+            const url = `/gift-list/thanks?giftGiver=${encodeURIComponent(giftGiverValue)}&yourEmail=${encodeURIComponent(yourEmailValue)}&comment=${encodeURIComponent(commentValue)}&price=${encodeURIComponent(parseFloat(itemPrice))}`;
+            window.location.href = url
+            
+            $.ajax({
+                    url: 'https://matrimonio.pythonanywhere.com/api/friends/',
+                    method: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify(data),
+                    success: function(result) {
+                        console.log(result)
+                        window.location.href = url;
+                    },
+                    error: function(error) {
+                        console.error('Error:', error);
+                    }
+                });
+
+
+            
+        }
+
+    </script>
+
+</body>
+</html>
