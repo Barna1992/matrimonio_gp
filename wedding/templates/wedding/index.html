@@ -2,7 +2,7 @@
 {% load static %}
 {% block title %}Home{% endblock %}
 {% block content %}
-<section id="slideshow" class="text-center py-12 h-screen flex flex-col justify-center items-center bg-cover bg-center transition-all duration-1000">
+<section id="slideshow" class="text-center py-12 h-screen flex flex-col justify-end items-center bg-cover bg-center transition-all duration-1000">
     <h1 class="text-white text-6xl md:text-6xl font-bold drop-shadow-md">Giovanna & Pietro</h1>
     <p class="text-white text-4xl font-bold mt-4 drop-shadow-md">7 giugno 2025</p>
     <p class="text-white text-4xl font-bold drop-shadow-md">Ci sposiamo!</p>
@@ -177,9 +177,9 @@
 
 
     const images = [
-    "{% static 'wedding/images/slide1.jpeg' %}",
-    "{% static 'wedding/images/slide2.jpeg' %}",
-    "{% static 'wedding/images/slide3.jpeg' %}"
+    "{% static 'wedding/images/slide1_test.jpeg' %}",
+    "{% static 'wedding/images/slide2_test.jpeg' %}",
+    "{% static 'wedding/images/slide3_test.jpeg' %}"
     ];
 
     let currentIndex = 0;
@@ -192,13 +192,6 @@
     img.src = images[currentIndex];
     
     img.onload = () => {
-        // Determine if the image is portrait or landscape
-        if (img.naturalHeight > img.naturalWidth) {
-        slideshow.style.backgroundSize = "contain"; // Show the entire portrait image
-        } else {
-        slideshow.style.backgroundSize = "cover"; // Fill container for landscape
-        }
-        
         // Update the background image
         slideshow.style.backgroundImage = `url(${images[currentIndex]})`;
         
