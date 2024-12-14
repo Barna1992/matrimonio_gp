@@ -43,16 +43,29 @@
 
 
 <!-- RSVP Section -->
-<section class="py-12 bg-gray-100 text-center" id="section3">
-    <h2 class="text-3xl font-bold mb-4">RSVP</h2>
-    <p class="mb-6 text-2xl">Non vediamo l’ora di festeggiare assieme.<br>Facci sapere se ci sarai.</p>
+<section
+  class="py-12 bg-cover bg-center text-center relative mt-20"
+  id="section3"
+  style="background-image: url('/static/wedding/images/v11.jpeg');"
+>
+  <!-- Overlay for readability -->
+  <div class="absolute inset-0 bg-black bg-opacity-50"></div>
+
+  <!-- Content -->
+  <div class="relative z-10">
+    <h2 class="text-3xl font-bold text-white mb-4">RSVP</h2>
+    <p class="mb-6 text-2xl text-white">
+      Non vediamo l’ora di festeggiare assieme.
+    </p>
     <button
-        onclick="openModal()"
-        class="bg-blue-500 text-white px-6 py-3 rounded-lg shadow hover:bg-blue-600"
+      onclick="openModal()"
+      class="bg-blue-500 text-white px-6 py-3 rounded-lg shadow hover:bg-blue-600"
     >
-        QUI
+    Facci sapere se ci sarai.
     </button>
+  </div>
 </section>
+
 
 
 <!-- RSVP Modal -->

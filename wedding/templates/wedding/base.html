@@ -26,23 +26,22 @@
             height: 100%;
             background-size: cover;
             background-position: center;
-            animation: slideshow 15s infinite;
+            animation: slideshow 50s infinite;
         }
 
         /* Keyframes for slideshow effect */
         @keyframes slideshow {
-            0%, 25% {
-                background-image: url('/static/wedding/images/gallery1.jpeg');
-            }
-            26%, 50% {
-                background-image: url('/static/wedding/images/gallery2.jpeg');
-            }
-            51%, 75% {
-                background-image: url('/static/wedding/images/gallery3.jpeg');
-            }
-            76%, 100% {
-                background-image: url('/static/wedding/images/slide1.jpeg');
-            }
+            0% { background-image: url('/static/wedding/images/v1.jpeg'); }
+            10% { background-image: url('/static/wedding/images/v2.jpeg'); }
+            20% { background-image: url('/static/wedding/images/v3.jpeg'); }
+            30% { background-image: url('/static/wedding/images/v4.jpeg'); }
+            40% { background-image: url('/static/wedding/images/v5.jpeg'); }
+            50% { background-image: url('/static/wedding/images/v6.jpeg'); }
+            60% { background-image: url('/static/wedding/images/v7.jpeg'); }
+            70% { background-image: url('/static/wedding/images/v8.jpeg'); }
+            80% { background-image: url('/static/wedding/images/v9.jpeg'); }
+            90% { background-image: url('/static/wedding/images/v10.jpeg'); }
+            100% { background-image: url('/static/wedding/images/v1.jpeg'); }
         }
 
         /* Text styling to make content readable over the background */
@@ -98,7 +97,7 @@
         {% endblock %}
     </main>
     <footer class="bg-gray-800 text-white text-center py-4">
-        <p>&copy; 2024 Giovanna & Pietro</p>
+        <p>&copy; 2025 Giovanna & Pietro</p>
     </footer>
 
     <script>
