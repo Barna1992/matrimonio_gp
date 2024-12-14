@@ -53,13 +53,13 @@
 
   <!-- Content -->
   <div class="relative z-10">
-    <h2 class="text-3xl font-bold text-white mb-4">RSVP</h2>
-    <p class="mb-6 text-2xl text-white">
+    <h2 class="text-4xl font-bold text-white mb-4">RSVP</h2>
+    <p class="mb-6 text-3xl text-white">
       Non vediamo l’ora di festeggiare assieme.
     </p>
     <button
       onclick="openModal()"
-      class="bg-blue-500 text-white px-6 py-3 rounded-lg shadow hover:bg-blue-600"
+      class="bg-blue-500 text-white text-2xl px-6 py-3 rounded-lg shadow hover:bg-blue-600"
     >
     Facci sapere se ci sarai.
     </button>
@@ -80,8 +80,8 @@
         >
             &times;
         </button>
-        <h3 class="text-2xl font-bold mb-4">Conferma la Presenza</h3>
-        <p class="mb-4">... e segnalaci eventuali intolleranze</p>
+        <h3 class="text-4xl font-bold mb-4">Conferma la Presenza</h3>
+        <p class="mb-4 text-3xl">... e segnalaci eventuali intolleranze</p>
         <form id="rsvpForm" onsubmit="submitForm(event)">
             <div class="mb-4">
                 <label for="name" class="block text-left text-gray-700">Nome</label>
@@ -139,8 +139,8 @@
 
 
 <section class="py-12 text-center" id="section4">
-    <h2 class="text-3xl font-bold mb-4">LISTA NOZZE</h2>
-    <p class="mb-6 text-2xl">Se lo desideri, contribuisci al nostro sogno di andare in Polinesia!</p>
+    <h2 class="text-4xl font-bold mb-4">LISTA NOZZE</h2>
+    <p class="mb-6 text-3xl">Se lo desideri, contribuisci al nostro sogno di andare in Polinesia!</p>
 
     <!-- Slideshow Container -->
     <a href="{% url 'gift_list' %}">
@@ -155,7 +155,7 @@
     </div>
     </a>
 
-    <a href="{% url 'gift_list' %}" class="bg-white-500 border-red-500 text-white px-6 py-3 rounded-lg shadow hover:bg-red-600">❤️</a>
+    <a href="{% url 'gift_list' %}" class="text-4xl bg-white-500 border-red-500 text-white px-6 py-3 rounded-lg shadow hover:bg-red-600">Grazie ❤️</a>
 </section>
 
 
