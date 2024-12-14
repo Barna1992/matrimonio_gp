@@ -67,7 +67,7 @@
         .then(response => response.json())
         .then(items => {
             const container = document.getElementById('items-container');
-            items.filter(i => i.category === "travel").sort((a,b) => a.ordering - b.ordering).forEach(item => {
+            items.sort((a,b) => a.ordering - b.ordering).forEach(item => {
               console.log(item);
               const itemHtml = `
               <div class="object-card">
