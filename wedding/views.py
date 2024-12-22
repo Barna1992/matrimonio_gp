@@ -29,8 +29,13 @@ def survey(request):
 
 
 def dashboard(request):
-    return render(request, 'wedding/dashboard.html')
-
+    rsvps = RSVP.objects.all()
+    friends = Friend.objects.all()
+    context = {
+        'rsvps': rsvps,
+        'friends': friends
+    }
+    return render(request, 'wedding/dashboard.html', context)
 
 class ItemViewSet(viewsets.ModelViewSet):
     queryset = Item.objects.all()
