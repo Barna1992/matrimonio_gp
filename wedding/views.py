@@ -28,6 +28,10 @@ def survey(request):
     return render(request, 'wedding/survey.html')
 
 
+def dashboard(request):
+    return render(request, 'wedding/dashboard.html')
+
+
 class ItemViewSet(viewsets.ModelViewSet):
     queryset = Item.objects.all()
     serializer_class = ItemSerializer

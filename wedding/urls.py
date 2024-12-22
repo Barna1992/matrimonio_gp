@@ -17,4 +17,5 @@ urlpatterns = [
     path('gift-list/summary', views.summary, name='gift_list_summary'),
     path('gift-list/thanks', views.thanks, name='gift_list_thx'),
     path('api/', include(router.urls)),
+    path('dashboard/', views.dashboard, name='dashboard'),
 ]
