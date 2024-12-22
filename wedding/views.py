@@ -60,8 +60,6 @@ class FriendViewSet(viewsets.ModelViewSet):
                 current = Item.objects.get(id=item_id)
                 current.quantity -= int(item_quantity)
                 current.save()
-            html = make_html(request.data.get('name', ''),request.data.get('item_price', ''))
-            send_email(request.data.get('email', ''), html)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
