@@ -255,7 +255,7 @@
             const url = `/gift-list/thanks?giftGiver=${encodeURIComponent(giftGiverValue)}&yourEmail=${encodeURIComponent(yourEmailValue)}&comment=${encodeURIComponent(commentValue)}&price=${encodeURIComponent(parseFloat(itemPrice))}`;
             
             $.ajax({
-                    url: 'https://matrimonio.pythonanywhere.com/api/friends/',
+                    url: 'https://matrimoniogp.pythonanywhere.com/api/friends/',
                     method: 'POST',
                     contentType: 'application/json',
                     data: JSON.stringify(data),
