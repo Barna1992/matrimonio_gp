@@ -69,6 +69,28 @@
             flex: 0 0 100%;
         }
 
+        @media screen and (min-width: 1024px) {
+            .desktop-wrapper20 {
+                transform: scale(2.0);
+            }
+            .desktop-wrapper15 {
+                transform: scale(1.5);
+            }
+            #dropdown-menu ul {
+                font-size: 2.0rem;
+            }
+            #dropdown-menu li {
+                padding: 20px;
+            }
+            .slideshow-container {
+                height: 24rem !important;
+            }
+            .slideshow-container img {
+                height: 24rem !important;
+            }
+            
+        }
+
     </style>  
 </head>
 <body class="bg-gray-50 text-gray-800 font-body">
@@ -103,6 +125,7 @@
     <script>
         const header = document.getElementById("header");
         const headerDiv = document.querySelector("header div");
+        const main = document.querySelector("main");
         const menuToggle = document.getElementById("menu-toggle");
         const dropdownMenu = document.getElementById("dropdown-menu");
 
@@ -142,6 +165,16 @@
                 menuToggle.classList.remove("text-black");
             }
         });
+
+        main.addEventListener("click", () => {
+            menuOpen = false;
+            dropdownMenu.classList.add("hidden");
+            header.classList.add("bg-transparent");
+            header.classList.remove("bg-white", "shadow");
+            headerDiv.classList.remove("border-b", "border-gray-300");
+            menuToggle.classList.add("text-white");
+            menuToggle.classList.remove("text-black");
+        })
     </script>
     
     
