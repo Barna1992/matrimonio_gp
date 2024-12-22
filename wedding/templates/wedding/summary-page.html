@@ -253,7 +253,6 @@
             };
 
             const url = `/gift-list/thanks?giftGiver=${encodeURIComponent(giftGiverValue)}&yourEmail=${encodeURIComponent(yourEmailValue)}&comment=${encodeURIComponent(commentValue)}&price=${encodeURIComponent(parseFloat(itemPrice))}`;
-            window.location.href = url
             
             $.ajax({
                     url: 'https://matrimonio.pythonanywhere.com/api/friends/',
