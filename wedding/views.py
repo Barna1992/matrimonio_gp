@@ -2,6 +2,8 @@ from django.shortcuts import render
 from rest_framework import viewsets
 from .models import Item, RSVP, Friend
 from .serializers import ItemSerializer, RSVPSerializer, FriendSerializer
+from rest_framework.response import Response
+
 
 def index(request):
     return render(request, 'wedding/index.html')
