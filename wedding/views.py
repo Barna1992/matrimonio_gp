@@ -49,3 +49,19 @@ class RSVPViewSet(viewsets.ModelViewSet):
 class FriendViewSet(viewsets.ModelViewSet):
     queryset = Friend.objects.all()
     serializer_class = FriendSerializer
+
+    def create(self, request, *args, **kwargs):
+        items = request.data.pop('string_ids', [])
+        serializer = self.get_serializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            for item in items:
+                item_id, item_quantity = item.split('-')
+                current = Item.objects.get(id=item_id)
+                current.quantity -= int(item_quantity)
+                current.save()
+            html = make_html(request.data.get('name', ''),request.data.get('item_price', ''))
+            send_email(request.data.get('email', ''), html)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        else:
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
