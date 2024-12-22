@@ -20,3 +20,14 @@ class RSVP(models.Model):
 
     def __str__(self):
         return f"{self.name} {self.surname}"
+    
+class Friend(models.Model):
+    name = models.CharField(max_length=100)
+    email = models.EmailField()
+    comment = models.TextField(blank=True, null=True)
+    string_ids = models.TextField()
+    item_titles = models.TextField()
+    item_price = models.FloatField()
+
+    def __str__(self):
+        return self.name
