@@ -269,8 +269,24 @@
         const email = document.getElementById('email').value;
         const presence = document.getElementById('presence').value;
         const food = document.getElementById('food').value;
+        const data = { name, surname, email, presence, food };
 
-        console.log('Form Submitted:', { name, surname, email, presence, food });
+        fetch('/api/rsvp/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Success:', data);
+            // Handle success, e.g., close the modal, show a success message, etc.
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+            // Handle error, e.g., show an error message
+        });
 
         // Close modal after submission
         closeModal();

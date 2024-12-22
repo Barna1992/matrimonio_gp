@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from rest_framework import viewsets
-from .models import Item
-from .serializers import ItemSerializer
+from .models import Item, RSVP
+from .serializers import ItemSerializer, RSVPSerializer
 
 def index(request):
     return render(request, 'wedding/index.html')
@@ -31,3 +31,8 @@ def survey(request):
 class ItemViewSet(viewsets.ModelViewSet):
     queryset = Item.objects.all()
     serializer_class = ItemSerializer
+
+
+class RSVPViewSet(viewsets.ModelViewSet):
+    queryset = RSVP.objects.all()
+    serializer_class = RSVPSerializer
