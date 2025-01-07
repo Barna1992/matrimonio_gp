@@ -2,6 +2,7 @@ body {
     font-family: 'Arsenal';
     margin: 0;
     padding: 0;
+    text-transform: uppercase !important;
 }
 
 h1 {
