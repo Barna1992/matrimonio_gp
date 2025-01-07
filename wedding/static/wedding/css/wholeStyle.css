@@ -9,7 +9,7 @@
     height: 100%;
     color: black;
     background-color: #fff;
-    font-family: 'Amatic SC';
+    font-family: 'Arsenal';
   }
   
   /* Styling for the hero section */
@@ -39,7 +39,7 @@
     background-size: cover;
     background-position: center;
     transition: background-image 0.5s ease-in-out; 
-    font-family: 'Caveat';
+    font-family: 'Arsenal';
   }
   
   .hero-section-bg {
@@ -54,7 +54,7 @@
     background-size: contain;
     background-position: center;
     transition: background-image 0.5s ease-in-out; 
-    font-family: 'Caveat';
+    font-family: 'Arsenal';
     background-color: #abd0f0;
   }
   
@@ -70,7 +70,7 @@
     z-index: 10;
     width: 100%;
     font-size: 1.5rem;
-    font-family: 'Caveat' !important;
+    font-family: 'Arsenal' !important;
   }
   
   .top-nav ul.active {
@@ -393,7 +393,7 @@
     text-align: center;
     font-size: 1.5rem;
     background-color: #cac7c7;
-    font-family: 'Amatic SC';
+    font-family: 'Arsenal';
     height: 55px;
     color: red;
   }
@@ -456,7 +456,7 @@
     padding: 0 1rem;
     text-align: center;
     font-weight: bolder;
-    font-family: 'Amatic SC';
+    font-family: 'Arsenal';
   }
   
   .object-title {
@@ -741,7 +741,7 @@
   .agenda h2 {
     text-align: center;
     font-size: 2.5rem;
-    font-family: 'Caveat';
+    font-family: 'Arsenal';
     padding: 2rem 0;
   }
   
