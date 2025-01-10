@@ -42,6 +42,17 @@
         <div id="countdown" class="text-4xl font-bold"></div>
     </div>
 </section>
+<section style="display: none;">
+    <div><img src="{% static 'wedding/images/v1.jpeg' %}" alt="Slide 1" class="slide-gallery" style="display: none;"></div>
+    <div><img src="{% static 'wedding/images/v2.jpeg' %}" alt="Slide 2" class="slide-gallery" style="display: none;"></div>
+    <div><img src="{% static 'wedding/images/v3.jpeg' %}" alt="Slide 3" class="slide-gallery" style="display: none;"></div>
+    <div><img src="{% static 'wedding/images/v4.jpeg' %}" alt="Slide 4" class="slide-gallery" style="display: none;"></div>
+    <div><img src="{% static 'wedding/images/v5.jpeg' %}" alt="Slide 5" class="slide-gallery" style="display: none;"></div>
+    <div><img src="{% static 'wedding/images/v6.jpeg' %}" alt="Slide 6" class="slide-gallery" style="display: none;"></div>
+    <div><img src="{% static 'wedding/images/v7.jpeg' %}" alt="Slide 7" class="slide-gallery" style="display: none;"></div>
+    <div><img src="{% static 'wedding/images/v8.jpeg' %}" alt="Slide 8" class="slide-gallery" style="display: none;"></div>
+    <div><img src="{% static 'wedding/images/v9.jpeg' %}" alt="Slide 9" class="slide-gallery" style="display: none;"></div>
+</section>
 
 
 <!-- RSVP Section -->
@@ -168,6 +179,7 @@
         const slides = document.querySelector(".slides");
         const totalSlides = document.querySelectorAll(".slide").length;
         let index = 0;
+        console.log(slides, totalSlides)
 
         setInterval(() => {
             index = (index + 1) % totalSlides;
