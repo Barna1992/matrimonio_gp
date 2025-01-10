@@ -56,7 +56,7 @@ def make_html(giftGiver, price):
     </head>
     <body class="cart-page">
 
-        <div class="container" style="background-color: #abd0f0 !important">
+        <div class="container" style="background-color: #FAF0CC !important">
         <h1>Grazie mille!</h1>
         <p>Grazie {0} per il tuo contributo!</p>
         <p>Puoi completare il regalo, effettuando il pagamento di <strong> {1} € </strong> tramite un bonifico bancario al seguente IBAN:</p>
