@@ -11,7 +11,7 @@ def send_email(destination, html):
     from email.mime.multipart import MIMEMultipart
     sender_email = "matrimonioandreamicol@gmail.com"
     receiver_email = destination
-    password = "niczbjdpbtuhxkdi"
+    password = "minuuhoyrmnnjnze "
     message = MIMEMultipart("alternative")
     message["Subject"] = "Matrimonio Giovanna & Pietro"
     message["From"] = sender_email
