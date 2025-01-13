@@ -9,7 +9,7 @@ def send_email(destination, html):
     import smtplib, ssl
     from email.mime.text import MIMEText
     from email.mime.multipart import MIMEMultipart
-    sender_email = "matrimonioandreamicol@gmail.com"
+    sender_email = "matrimoniogiovannapietro@gmail.com"
     receiver_email = destination
     password = "minuuhoyrmnnjnze "
     message = MIMEMultipart("alternative")
