@@ -30,7 +30,6 @@
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th>ID</th>
                     <th>Name</th>
                     <th>Email</th>
                     <th>Response</th>
@@ -40,7 +39,6 @@
             <tbody>
                 {% for rsvp in rsvps %}
                 <tr>
-                    <td>{{ rsvp.id }}</td>
                     <td>{{ rsvp.name }} {{ rsvp.surname }}</td>
                     <td>{{ rsvp.email }}</td>
                     <td>{{ rsvp.presence }}</td>
@@ -55,7 +53,6 @@
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th>ID</th>
                     <th>Name</th>
                     <th>Email</th>
                     <th>Comment</th>
@@ -66,7 +63,6 @@
             <tbody>
                 {% for friend in friends %}
                 <tr>
-                    <td>{{ friend.id }}</td>
                     <td>{{ friend.name }}</td>
                     <td>{{ friend.email }}</td>
                     <td>{{ friend.comment }}</td>
